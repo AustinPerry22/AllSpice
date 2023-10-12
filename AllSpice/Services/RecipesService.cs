@@ -47,5 +47,12 @@ public class RecipesService
         return recipes;
     }
 
+    internal void DeleteRecipe(int recipeId, string userId)
+    {
+        Recipe og = this.GetRecipeById(recipeId);
+        if (og.CreatorId != userId) throw new Exception("You Don't Own this!");
+        _repo.DeleteRecipe(recipeId);
+    }
+
     // INTERALS
 }

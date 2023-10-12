@@ -2,6 +2,7 @@
 
 
 
+
 namespace AllSpice.Repositories;
 
 public class RecipesRepository
@@ -100,5 +101,15 @@ public class RecipesRepository
             return recipe;
         }, og).FirstOrDefault();
         return recipe;
+    }
+
+    internal void DeleteRecipe(int recipeId)
+    {
+        string sql = @"
+        DELETE FROM recipes
+        WHERE id = @recipeId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { recipeId });
     }
 }
