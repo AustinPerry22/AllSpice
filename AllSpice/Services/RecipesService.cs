@@ -1,3 +1,4 @@
+
 namespace AllSpice.Services;
 
 public class RecipesService
@@ -7,6 +8,12 @@ public class RecipesService
     public RecipesService(RecipesRepository repo)
     {
         _repo = repo;
+    }
+
+    internal List<Recipe> GetRecipes()
+    {
+        List<Recipe> recipes = _repo.GetRecipes();
+        return recipes;
     }
 
     // INTERALS
