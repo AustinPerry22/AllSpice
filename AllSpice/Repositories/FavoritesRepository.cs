@@ -1,4 +1,5 @@
 
+
 namespace AllSpice.Repositories;
 
 public class FavoritesRepository
@@ -24,5 +25,24 @@ public class FavoritesRepository
         int lastInsertId = _db.ExecuteScalar<int>(sql, favoriteData);
         favoriteData.Id = lastInsertId;
         return favoriteData;
+    }
+
+    internal List<RecipeFavoriteViewModel> GetAccountFavorites(string accountId)
+    {
+        string sql = @"
+        SELECT
+        fav.*,
+        rec.*  
+        FROM favorites fav
+        JOIN recipes rec ON rec.id = fav.recipeId
+        WHERE fav.accountId = @accountId
+        ;";
+        List<RecipeFavoriteViewModel> myFavorites = _db.Query<Favorite, RecipeFavoriteViewModel, RecipeFavoriteViewModel>(sql, (favorite, recipe) =>
+        {
+            recipe.FavoriteId = favorite.Id;
+            recipe.AccountId = favorite.AccountId;
+            return recipe;
+        }, new { accountId }).ToList();
+        return myFavorites;
     }
 }
