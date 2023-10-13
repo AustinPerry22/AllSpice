@@ -37,13 +37,13 @@ CREATE TABLE
         id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
-        creatorId VARCHAR(255) NOT NULL,
+        accountId VARCHAR(255) NOT NULL,
         recipeId INT NOT NULL,
-        FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
         FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
     ) default charset utf8mb4;
 
-DROP TABLE accounts;
+DROP TABLE favorites;
 
 INSERT INTO
     recipes(
