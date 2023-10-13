@@ -2,12 +2,11 @@
   <div class="container-fluid">
     <!-- STUB splash card and searchbar/login -->
     <Cover/>
-    <!-- STUB select thing -->
     <SelectCategory/>
-    <section class="row justify-content-around">
+    <section class="row justify-content-around mx-3">
       <!-- STUB recipe cards -->
       <div v-for="recipe in recipes" :key="recipe.id" class="col-3">
-        {{ recipe.title }}
+        <RecipeCard :recipe="recipe"/>
       </div>
     </section>
 
@@ -27,6 +26,7 @@ import { computed, onMounted } from 'vue';
 import {AppState} from '../AppState'
 import Cover from '../components/Cover.vue';
 import SelectCategory from "../components/SelectCategory.vue"
+import RecipeCard from '../components/RecipeCard.vue';
 import {recipesService} from "../services/RecipesService"
 
 
@@ -40,7 +40,7 @@ export default {
           recipes : computed(()=> AppState.recipes)
         };
     },
-    components: { Cover, SelectCategory }
+    components: { Cover, SelectCategory, RecipeCard }
 }
 </script>
 
