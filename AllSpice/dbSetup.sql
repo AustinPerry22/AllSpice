@@ -6,7 +6,7 @@ CREATE TABLE
         name varchar(255) COMMENT 'User Name',
         email varchar(255) COMMENT 'User Email',
         picture varchar(255) COMMENT 'User Picture'
-    ) default charset utf8 COMMENT '';
+    ) default charset utf8mb4 COMMENT '';
 
 CREATE TABLE
     IF NOT EXISTS recipes(
@@ -31,6 +31,19 @@ CREATE TABLE
         recipeId INT NOT NULL,
         FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
     ) default charset utf8mb4;
+
+CREATE TABLE
+    IF NOT EXISTS favorites(
+        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+        creatorId VARCHAR(255) NOT NULL,
+        recipeId INT NOT NULL,
+        FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
+    ) default charset utf8mb4;
+
+DROP TABLE accounts;
 
 INSERT INTO
     recipes(
