@@ -53,6 +53,4 @@ public class RecipesService
         if (og.CreatorId != userId) throw new Exception("You Don't Own this!");
         _repo.DeleteRecipe(recipeId);
     }
-
-    // INTERALS
 }
