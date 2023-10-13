@@ -4,8 +4,12 @@
     <Cover/>
     <!-- STUB select thing -->
     <SelectCategory/>
-    <!-- STUB recipe cards -->
-    <!-- 1 v-for appstate.recipecards -->
+    <section class="row justify-content-around">
+      <!-- STUB recipe cards -->
+      <div v-for="recipe in recipes" :key="recipe.id" class="col-3">
+        {{ recipe.title }}
+      </div>
+    </section>
 
     <!-- STUB add button -->
     <section class="row justify-content-end">
@@ -19,13 +23,22 @@
 </template>
 
 <script>
+import { computed, onMounted } from 'vue';
+import {AppState} from '../AppState'
 import Cover from '../components/Cover.vue';
 import SelectCategory from "../components/SelectCategory.vue"
+import {recipesService} from "../services/RecipesService"
 
 
 export default {
     setup() {
-        return {};
+      onMounted(()=>{
+        AppState.recipes = [];
+        recipesService.GetAllRecipes()
+      })
+        return {
+          recipes : computed(()=> AppState.recipes)
+        };
     },
     components: { Cover, SelectCategory }
 }
