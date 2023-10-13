@@ -23,9 +23,14 @@ public class IngredientsService
         return ingredient;
     }
 
+
     internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
     {
         List<Ingredient> ingredients = _repo.GetIngredientsByRecipe(recipeId);
         return ingredients;
+    }
+    internal void DeleteIngredient(int ingredientId)
+    {
+        _repo.DeleteIngredient(ingredientId);
     }
 }

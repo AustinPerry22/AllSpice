@@ -1,5 +1,6 @@
 
 
+
 namespace AllSpice.Repositories;
 
 public class IngredientsRepository
@@ -29,6 +30,7 @@ public class IngredientsRepository
 
     }
 
+
     internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
     {
         string sql = @"
@@ -38,5 +40,14 @@ public class IngredientsRepository
 
         List<Ingredient> ingredients = _db.Query<Ingredient>(sql, new { recipeId }).ToList();
         return ingredients;
+    }
+    internal void DeleteIngredient(int ingredientId)
+    {
+        string sql = @"
+        DELETE FROM ingredients
+        WHERE id = @ingredientId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { ingredientId });
     }
 }
