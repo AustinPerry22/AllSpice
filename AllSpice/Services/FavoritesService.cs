@@ -1,4 +1,5 @@
 
+
 namespace AllSpice.Services;
 
 public class FavoritesService
@@ -19,9 +20,14 @@ public class FavoritesService
         return favorite;
     }
 
+
     internal List<RecipeFavoriteViewModel> GetAccountFavorites(string userId)
     {
         List<RecipeFavoriteViewModel> favorites = _repo.GetAccountFavorites(userId);
         return favorites;
+    }
+    internal void DeleteFavorite(int favoriteId)
+    {
+        _repo.DeleteFavorite(favoriteId);
     }
 }

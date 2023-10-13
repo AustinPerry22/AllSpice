@@ -1,5 +1,6 @@
 
 
+
 namespace AllSpice.Repositories;
 
 public class FavoritesRepository
@@ -44,5 +45,15 @@ public class FavoritesRepository
             return recipe;
         }, new { accountId }).ToList();
         return myFavorites;
+    }
+
+    internal void DeleteFavorite(int favoriteId)
+    {
+        string sql = @"
+        DELETE FROM favorites
+        WHERE id = @favoriteId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { favoriteId });
     }
 }

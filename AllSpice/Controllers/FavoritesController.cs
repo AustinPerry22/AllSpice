@@ -32,4 +32,19 @@ public class FavortiesController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [Authorize]
+    [HttpDelete("{favoriteId}")]
+    public ActionResult<string> DeleteFavorite(int favoriteId)
+    {
+        try
+        {
+            _favoritesService.DeleteFavorite(favoriteId);
+            return "Favorite Deleted";
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
