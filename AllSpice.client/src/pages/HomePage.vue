@@ -5,7 +5,7 @@
     <SelectCategory/>
     <section class="row justify-content-around mx-3">
       <!-- STUB recipe cards -->
-      <div v-for="recipe in recipes" :key="recipe.id" class="col-3">
+      <div v-for="recipe in recipes" :key="recipe.id" class="col-4 g-5">
         <RecipeCard :recipe="recipe"/>
       </div>
     </section>
