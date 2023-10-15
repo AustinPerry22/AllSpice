@@ -6,8 +6,8 @@
               <section class="row justify-content-between">
                 <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
-                  <h5 v-if="account.id" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart"></i></h5>
-                  <h5 v-if="account.id" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart-outline"></i></h5>
+                  <h5 v-if="account.id && recipe.isFavorite" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart"></i></h5>
+                  <h5 v-else-if="account.id" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart-outline"></i></h5>
               </section>
             </div>
             <div class="col-12">
