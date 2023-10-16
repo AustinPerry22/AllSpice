@@ -9,6 +9,10 @@ class RecipesService{
         AppState.activeRecipes = AppState.recipes
     }
 
+    async editRecipe(recipe){
+        await api.put(`api/recipes/${recipe.id}`, recipe)
+    }
+
     setActiveRecipe(recipeId) {
         AppState.activeRecipe = AppState.recipes.find(recipe => recipe.id == recipeId)
     }
