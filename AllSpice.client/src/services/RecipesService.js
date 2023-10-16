@@ -41,5 +41,9 @@ class RecipesService{
         }
         AppState.activeRecipes = activeRecipes
     }
+
+    searchRecipes(searchData){
+        AppState.activeRecipes = AppState.recipes.filter(recipe => recipe.category == searchData.search)
+    }
 }
 export const recipesService = new RecipesService()
