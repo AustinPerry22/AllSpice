@@ -8,6 +8,5 @@ export class Recipe {
         this.category = data.category
         this.creatorId = data.creatorId
         this.creator = data.creator
-        this.isFavorite = false
     }
 }
