@@ -6,7 +6,9 @@ class RecipesService{
 
     async createRecipe(recipeData) {
         const res = await api.post('api/recipes', recipeData)
-        AppState.recipes.push(new Recipe(res.data))
+        const newRecipe = new Recipe(res.data)
+        AppState.recipes.push(newRecipe)
+        AppState.activeRecipe = newRecipe
     }
     async getAllRecipes() {
         const res = await api.get('api/recipes')

@@ -8,7 +8,7 @@
         <input v-model="recipeData.img" type="url" class="form-control" maxlength="5000" required>
         <label for="category">Category</label>
         <input v-model="recipeData.category" type="text" class="form-control" maxlength="255" required>
-        <button class="btn btn-success">Create Recipe</button>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#create-recipe">Create Recipe</button>
     </form>
 </template>
 
@@ -18,6 +18,7 @@ import { AppState } from '../AppState';
 import { computed, reactive, onMounted, ref } from 'vue';
 import Pop from '../utils/Pop';
 import { recipesService } from '../services/RecipesService';
+import {Modal} from 'bootstrap';
 export default {
     setup(){
         const recipeData = ref({})
@@ -28,6 +29,7 @@ export default {
             try {
                 await recipesService.createRecipe(recipeData.value)
                 recipeData.value = {}
+                Modal.getOrCreateInstance("#active-recipe").show()
             } catch (error) {
                 Pop.error(error)
             }
