@@ -3,7 +3,7 @@
       <div class="col-11-5 splash-img mt-4">
         <section class="row justify-content-end py-2">
           <div class="col-5">
-            searchbar
+            <SearchBar/>
           </div>
           <div class="col-1">
             <Login/>
@@ -18,12 +18,13 @@
 
 <script>
 import Login from './Login.vue';
+import SearchBar from './SearchBar.vue';
 
 export default {
     setup() {
         return {};
     },
-    components: { Login }
+    components: { Login, SearchBar }
 };
 </script>
 
