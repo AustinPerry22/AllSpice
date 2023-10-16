@@ -16,5 +16,7 @@ export const AppState = reactive({
   activeRecipes: [],
 
   /**@type {Recipe} */
-  activeRecipe: {}
+  activeRecipe: {},
+
+  instructionsLock: true
 })
