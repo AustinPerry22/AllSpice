@@ -3,6 +3,11 @@ import { Recipe } from "../models/Recipe"
 import { api } from "./AxiosService"
 
 class RecipesService{
+
+    async createRecipe(recipeData) {
+        const res = await api.post('api/recipes', recipeData)
+        AppState.recipes.push(new Recipe(res.data))
+    }
     async getAllRecipes() {
         const res = await api.get('api/recipes')
         AppState.recipes = res.data.map(recipe => new Recipe(recipe))
