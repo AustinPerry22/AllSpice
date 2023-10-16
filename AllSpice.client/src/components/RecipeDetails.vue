@@ -21,7 +21,7 @@
         </div>
         <h6 v-for="ingredient in ingredients" :key="ingredient.id">{{ ingredient.name }}
             <!-- TODO delete ingredient @click -->
-            <button v-if="!locked" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
+            <button v-if="!locked" @click="deleteIngredient(ingredient.id)" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </h6>
         <div v-if="!locked">
             <form @submit.prevent="createIngredient">
@@ -66,6 +66,14 @@ export default {
                 await ingredientsService.createIngredient(ingredientData.value)
                 ingredientData.value = {} 
             } catch (error) {
+                Pop.error(error)
+            }
+        },
+
+        async deleteIngredient(ingredientId){
+            try{
+                await ingredientsService.deleteIngredient(ingredientId)
+            } catch (error){
                 Pop.error(error)
             }
         }
