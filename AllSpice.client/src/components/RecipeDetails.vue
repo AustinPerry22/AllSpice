@@ -5,19 +5,33 @@
     </div>
     <div class="col-4">
         <h5>{{ recipe.category }}</h5>
-        <p>{{ recipe.instructions }}</p>
         <div v-if="recipe.creatorId == accountId">
             <div v-if="!locked">
                 form here
-                <button @click="toggleLock()" class="btn btn-secondary">lock</button>
             </div>
             <div v-else>
-                Steps <button @click="toggleLock()" class="btn btn-secondary">unlock</button>
+                <p>{{ recipe.instructions }}</p>
             </div>
         </div>
     </div>
     <div class="col-4">
-        <h6 v-for="ingredient in ingredients" :key="ingredient.id">{{ ingredient.name }}</h6>
+        <div v-if="recipe.creatorId == accountId" class="text-end">
+            <button v-if="!locked" @click="toggleLock()" class="btn btn-danger" >lock</button>
+            <button v-else @click="toggleLock()" class="btn btn-success" >unlock</button>
+        </div>
+        <h6 v-for="ingredient in ingredients" :key="ingredient.id">{{ ingredient.name }}
+            <!-- TODO delete ingredient @click -->
+            <button v-if="!locked" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
+        </h6>
+        <div v-if="!locked">
+            <form @submit.prevent="createIngredient">
+                <label for="name">Ingredient Name:</label>
+                <input v-model="ingredientData.name" type="text" required maxlength="255" class="form-control">
+                <label for="quantity">Quantity:</label>
+                <input v-model="ingredientData.quantity" type="text" maxlength="255" placeholder="1 Cup" class="form-control" required>
+                <button class="btn btn-success">Add Ingredient</button>
+            </form>
+        </div>
     </div>
 </section>
 </template>
@@ -25,16 +39,19 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted, watchEffect } from 'vue';
+import { computed, reactive, onMounted, watchEffect, ref } from 'vue';
 import Pop from '../utils/Pop';
+import { ingredientsService } from '../services/IngredientsService';
 export default {
     setup(){
+        const ingredientData = ref({})
         watchEffect(()=>{
             AppState.activeRecipe
             AppState.instructionsLock = true;
         })
         
     return { 
+        ingredientData,
         locked: computed(()=> AppState.instructionsLock),
         recipe: computed(()=> AppState.activeRecipe),
         recipeImg: computed(()=> `url('${AppState.activeRecipe.img}')`),
@@ -42,6 +59,15 @@ export default {
         accountId: computed(()=> AppState.account.id),
         toggleLock(){
             AppState.instructionsLock = !AppState.instructionsLock;
+        },
+
+        async createIngredient(){
+            try {
+                await ingredientsService.createIngredient(ingredientData.value)
+                ingredientData.value = {} 
+            } catch (error) {
+                Pop.error(error)
+            }
         }
      }
     }
