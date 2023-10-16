@@ -18,6 +18,14 @@
       </div>
     </section>
     <!-- STUB MODAL WRAPPERS -->
+    <ModalWrapper id="active-recipe">
+        <template #header>
+          <h5>{{ activeRecipe.title }}</h5>
+        </template>
+        <template #body>
+          <RecipeDetails/>
+        </template>
+    </ModalWrapper>
   </div>
 
 </template>
@@ -28,6 +36,7 @@ import {AppState} from '../AppState'
 import Cover from '../components/Cover.vue';
 import SelectCategory from "../components/SelectCategory.vue"
 import RecipeCard from '../components/RecipeCard.vue';
+import RecipeDetails from '../components/RecipeDetails.vue';
 import {recipesService} from "../services/RecipesService"
 import {favoritesService} from "../services/FavoritesService"
 import Pop from '../utils/Pop';
@@ -68,9 +77,10 @@ export default {
     }
         return {
           recipes : computed(()=> AppState.activeRecipes),
+          activeRecipe: computed (()=> AppState.activeRecipe)
         };
     },
-    components: { Cover, SelectCategory, RecipeCard }
+    components: { Cover, SelectCategory, RecipeCard, RecipeDetails }
 }
 </script>
 

@@ -9,6 +9,10 @@ class RecipesService{
         AppState.activeRecipes = AppState.recipes
     }
 
+    setActiveRecipe(recipeId) {
+        AppState.activeRecipe = AppState.recipes.find(recipe => recipe.id == recipeId)
+    }
+
     changeRecipes(recipeType){
         let activeRecipes = AppState.activeRecipes
         const allRecipes = AppState.recipes

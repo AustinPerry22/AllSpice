@@ -1,6 +1,6 @@
 <template>
     <section class="row justify-content-center">
-        <div class="col-9">
+        <div @click="openRecipeModal(recipe.id)" class="col-9" data-bs-toggle="modal" data-bs-target='#active-recipe'>
           <section class="row elevation-3 recipe-cover align-content-between selectable">
             <div class="col-12">
               <section class="row justify-content-between">
@@ -26,6 +26,7 @@ import { Recipe } from '../models/Recipe';
 import { AppState } from '../AppState';
 import Pop from '../utils/Pop';
 import { favoritesService } from '../services/FavoritesService';
+import {recipesService} from '../services/RecipesService';
 
 export default {
 props: {recipe: {type: Recipe, required: true}},
@@ -41,6 +42,11 @@ setup(props) {
       } catch (error) {
         Pop.error(error)
       }
+    },
+
+    openRecipeModal(recipeId)
+    {
+      recipesService.setActiveRecipe(recipeId);
     }
   };
 },
