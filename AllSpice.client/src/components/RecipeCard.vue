@@ -6,8 +6,7 @@
               <section class="row justify-content-between">
                 <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
-                  <h5 v-if="account.id && recipe.isFavorite" @click="toggleFavorite()" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart"></i></h5>
-                  <h5 v-else-if="account.id" @click="toggleFavorite()" class="col-1 me-2 mt-2 p-0 heart"><i class="mdi mdi-heart-outline"></i></h5>
+                 
               </section>
             </div>
             <div class="col-12">
@@ -27,6 +26,7 @@ import { AppState } from '../AppState';
 import Pop from '../utils/Pop';
 import { favoritesService } from '../services/FavoritesService';
 import {recipesService} from '../services/RecipesService';
+import{ingredientsService} from '../services/IngredientsService'
 
 export default {
 props: {recipe: {type: Recipe, required: true}},
@@ -47,6 +47,15 @@ setup(props) {
     openRecipeModal(recipeId)
     {
       recipesService.setActiveRecipe(recipeId);
+      this.getIngredients()
+    },
+    async getIngredients(){
+        try{
+            await ingredientsService.getIngredients()
+        }
+        catch(error){
+            Pop.error(error)
+        }
     }
   };
 },

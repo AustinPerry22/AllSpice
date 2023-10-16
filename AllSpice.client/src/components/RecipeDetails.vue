@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col-4">
-        ingredients
+        <h6 v-for="ingredient in ingredients" :key="ingredient.id">{{ ingredient.name }}</h6>
     </div>
 </section>
 </template>
@@ -26,16 +26,19 @@
 <script>
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted, watchEffect } from 'vue';
+import Pop from '../utils/Pop';
 export default {
     setup(){
         watchEffect(()=>{
             AppState.activeRecipe
             AppState.instructionsLock = true;
         })
+        
     return { 
         locked: computed(()=> AppState.instructionsLock),
         recipe: computed(()=> AppState.activeRecipe),
         recipeImg: computed(()=> `url('${AppState.activeRecipe.img}')`),
+        ingredients: computed(()=> AppState.ingredients),
         accountId: computed(()=> AppState.account.id),
         toggleLock(){
             AppState.instructionsLock = !AppState.instructionsLock;
