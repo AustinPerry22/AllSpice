@@ -9,7 +9,7 @@
             <Login/>
           </div>
         </section>
-        <h1 class="pt-5">All-Spice</h1>
+        <h1 class="pt-3">All-Spice</h1>
         <h6>Cherish Your Family</h6>
         <h6 class="pb-5">And Their Cooking</h6>
       </div>
@@ -35,7 +35,13 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
+  border-radius: .5rem;
+  filter: drop-shadow(.1rem 0.1rem .05rem rgba(0, 0, 0, 0.397))
+}
+
+h6, h1{
+  color: rgb(240, 240, 240);
+  filter: drop-shadow(.25rem 0.25rem .1rem rgba(0, 0, 0, 0.397))
 }
 
 .col-11-5{

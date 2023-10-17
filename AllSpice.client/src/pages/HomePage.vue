@@ -12,7 +12,7 @@
 
     <!-- STUB add button -->
     <section class="row justify-content-end sticky-bottom">
-      <div class="col-1 text-center">
+      <div v-if="user.isAuthenticated" class="col-1 text-center">
         <!-- TODO make custom button -->
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target='#create-recipe'><i class="mdi mdi-plus"></i></button>
       </div>
@@ -89,7 +89,8 @@ export default {
     }
         return {
           recipes : computed(()=> AppState.activeRecipes),
-          activeRecipe: computed (()=> AppState.activeRecipe)
+          activeRecipe: computed (()=> AppState.activeRecipe),
+          user : computed(()=> AppState.user)
         };
     },
     components: { Cover, SelectCategory, RecipeCard, RecipeDetails, CreateRecipeForm }
