@@ -1,14 +1,14 @@
 <template>
     <section class="row justify-content-center">
-        <div @click="openRecipeModal(recipe.id)" class="col-9" data-bs-toggle="modal" data-bs-target='#active-recipe'>
+        <div @click="openRecipeModal(recipe.id)" class="col-9">
           <section class="row elevation-3 recipe-cover align-content-between selectable">
             <div class="col-12">
               <section class="row justify-content-between">
                 <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
                 <div v-if="account.id">
-                  <button v-if="isFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart"></i></button>
-                  <button v-else class="col-2 btn btn-info"><i class="mdi mdi-heart-outline"></i></button>
+                  <button v-if="isFavorite" @click.stop="deleteFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart"></i></button>
+                  <button v-else @click.stop="addFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart-outline"></i></button>
 
                 </div>
               </section>
@@ -32,6 +32,7 @@ import { favoritesService } from '../services/FavoritesService';
 import {recipesService} from '../services/RecipesService';
 import{ingredientsService} from '../services/IngredientsService'
 import { Favorite } from '../models/Favorite';
+import { Modal } from 'bootstrap';
 
 export default {
 props: {recipe: {type: [Recipe, Favorite], required: true}},
@@ -49,27 +50,28 @@ setup(props) {
       return false
     }),
 
-    async toggleFavorite()
+    async addFavorite()
     {
       try {
-        favoritesService.toggleFavorite(props.recipe)
+        await favoritesService.addFavorite(props.recipe.id)
       } catch (error) {
         Pop.error(error)
       }
     },
 
+    async getIngredients(){
+      try{
+        await ingredientsService.getIngredients()
+      }
+      catch(error){
+        Pop.error(error)
+      }
+    },
     openRecipeModal(recipeId)
     {
       recipesService.setActiveRecipe(recipeId);
       this.getIngredients()
-    },
-    async getIngredients(){
-        try{
-            await ingredientsService.getIngredients()
-        }
-        catch(error){
-            Pop.error(error)
-        }
+      Modal.getOrCreateInstance('#active-recipe').show()
     }
   };
 },

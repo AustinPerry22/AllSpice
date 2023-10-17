@@ -10,6 +10,13 @@ class FavoritesService {
         AppState.favorites = res.data.map(favorite => new Favorite(favorite));
     }
 
+    async addFavorite(recipeId)
+    {
+        // TODO fix this, its ineffieceint 
+        await api.post('api/favorites', {recipeId: recipeId})
+        this.getFavorites()
+    }
+
     setFavorites(){
         AppState.activeRecipes = AppState.favorites
     }

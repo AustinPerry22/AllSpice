@@ -23,9 +23,13 @@ class RecipesService{
     async deleteRecipe(recipeId){
         await api.delete(`api/recipes/${recipeId}`)
         AppState.activeRecipe = {}
-        const foundIndex = AppState.recipes.findIndex(recipe => recipe.id == recipeId)
-        AppState.activeRecipes.splice(foundIndex, 1)
-        AppState.recipes.splice(foundIndex, 1)
+        const allfoundIndex = AppState.recipes.findIndex(recipe => recipe.id == recipeId)
+        AppState.recipes.splice(allfoundIndex, 1)
+
+        const favoriteIndex = AppState.favorites.findIndex(recipe => recipe.id == recipeId)
+        AppState.favorites.splice(favoriteIndex, 1)
+        const activefoundIndex = AppState.activeRecipes.findIndex(recipe => recipe.id == recipeId)
+        AppState.activeRecipes.splice(activefoundIndex, 1)
     }
 
     setActiveRecipe(recipeId) {
