@@ -39,6 +39,9 @@
             </form>
         </div>
     </div>
+    <div v-if="!locked" class="text-end">
+        <button @click="deleteRecipe" class="btn btn-danger">Delete Recipe</button>
+    </div>
 </section>
 </template>
 
@@ -49,6 +52,7 @@ import { computed, reactive, onMounted, watchEffect, ref } from 'vue';
 import Pop from '../utils/Pop';
 import { ingredientsService } from '../services/IngredientsService';
 import { recipesService } from '../services/RecipesService';
+import { Modal } from 'bootstrap';
 export default {
     setup(){
         const ingredientData = ref({})
@@ -84,14 +88,29 @@ export default {
                 Pop.error(error)
             }
         },
-
+        
         async editRecipe(){
             try{
                 await recipesService.editRecipe(this.recipe)
             }catch (error){
                 Pop.error(error)
             }
+        },
+        
+        async deleteRecipe(){
+            try {
+                if(await Pop.confirm("Are you sure you want to delete this recipe?"))
+                {
+                    Modal.getOrCreateInstance("#active-recipe").hide()
+                    await recipesService.deleteRecipe(this.recipe.id)
+                    Pop.success("Recipe Deleted")
+                }
+            } catch (error) {
+                Pop.error(error)
+            }
         }
+
+
      }
     }
 };

@@ -20,6 +20,14 @@ class RecipesService{
         await api.put(`api/recipes/${recipe.id}`, recipe)
     }
 
+    async deleteRecipe(recipeId){
+        await api.delete(`api/recipes/${recipeId}`)
+        AppState.activeRecipe = {}
+        const foundIndex = AppState.recipes.findIndex(recipe => recipe.id == recipeId)
+        AppState.activeRecipes.splice(foundIndex, 1)
+        AppState.recipes.splice(foundIndex, 1)
+    }
+
     setActiveRecipe(recipeId) {
         AppState.activeRecipe = AppState.recipes.find(recipe => recipe.id == recipeId)
     }
