@@ -33,6 +33,7 @@ import {recipesService} from '../services/RecipesService';
 import{ingredientsService} from '../services/IngredientsService'
 import { Favorite } from '../models/Favorite';
 import { Modal } from 'bootstrap';
+import { logger } from '../utils/Logger';
 
 export default {
 props: {recipe: {type: [Recipe, Favorite], required: true}},
@@ -54,6 +55,15 @@ setup(props) {
     {
       try {
         await favoritesService.addFavorite(props.recipe.id)
+      } catch (error) {
+        Pop.error(error)
+      }
+    },
+
+    async deleteFavorite()
+    {
+      try {
+        await favoritesService.deleteFavorite(props.recipe.id)
       } catch (error) {
         Pop.error(error)
       }
