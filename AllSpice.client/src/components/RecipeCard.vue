@@ -6,7 +6,11 @@
               <section class="row justify-content-between">
                 <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
-                 
+                <div v-if="account.id">
+                  <button v-if="isFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart"></i></button>
+                  <button v-else class="col-2 btn btn-info"><i class="mdi mdi-heart-outline"></i></button>
+
+                </div>
               </section>
             </div>
             <div class="col-12">
@@ -35,6 +39,15 @@ setup(props) {
   return {
     recipeImg: computed(()=> `url('${props.recipe.img}')`),
     account: computed(()=> AppState.account),
+    isFavorite: computed(()=> {
+      let favorite = null
+      favorite = AppState.favorites.filter(fav => fav.id == props.recipe.id)
+      if(favorite[0])
+      {
+        return true
+      }
+      return false
+    }),
 
     async toggleFavorite()
     {
