@@ -35,13 +35,10 @@ class RecipesService{
     changeRecipes(recipeType){
         let activeRecipes = AppState.activeRecipes
         const allRecipes = AppState.recipes
+        AppState.activeRecipes = []
         if(recipeType == "home")
         {
             activeRecipes = allRecipes
-        }
-        if(recipeType == "favorite")
-        {
-            activeRecipes = allRecipes.filter(recipe => recipe.isFavorite == true)
         }
         if(recipeType == "mine")
         {

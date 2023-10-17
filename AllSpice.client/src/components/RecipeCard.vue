@@ -27,9 +27,10 @@ import Pop from '../utils/Pop';
 import { favoritesService } from '../services/FavoritesService';
 import {recipesService} from '../services/RecipesService';
 import{ingredientsService} from '../services/IngredientsService'
+import { Favorite } from '../models/Favorite';
 
 export default {
-props: {recipe: {type: Recipe, required: true}},
+props: {recipe: {type: [Recipe, Favorite], required: true}},
 setup(props) {
   return {
     recipeImg: computed(()=> `url('${props.recipe.img}')`),
