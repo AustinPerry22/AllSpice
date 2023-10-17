@@ -7,7 +7,13 @@
         <label for="background-img">Image Url</label>
         <input v-model="recipeData.img" type="url" class="form-control" maxlength="5000" required>
         <label for="category">Category</label>
-        <input v-model="recipeData.category" type="text" class="form-control" maxlength="255" required>
+        <select v-model="recipeData.category" class="form-control" required>
+            <option value="Soup">Soup</option>
+            <option value="Salad">Salad</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Main Course">Main Course</option>
+        </select>
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#create-recipe">Create Recipe</button>
     </form>
 </template>
