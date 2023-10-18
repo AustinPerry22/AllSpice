@@ -21,7 +21,9 @@
     <!-- STUB MODAL WRAPPERS -->
     <ModalWrapper id="active-recipe">
         <template #header>
-          <h5>{{ activeRecipe.title }}</h5>
+          <div class="text-center">
+            <h5>{{ activeRecipe.title }}</h5>
+          </div>
         </template>
         <template #body>
           <RecipeDetails/>

@@ -31,4 +31,11 @@ setup() {
 
 
 <style>
+.modal-header{
+color: white;
+background-color: #527360;
+}
+.modal-body{
+    background-color: white;
+}
 </style>
