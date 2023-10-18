@@ -2,7 +2,7 @@
     <section class="row justify-content-center text-center">
       <div class="col-11-5 splash-img mt-4">
         <section class="row justify-content-end py-2">
-          <div class="col-5">
+          <div class="col-5 mt-2 mt-md-3">
             <SearchBar/>
           </div>
           <div class="col-1">
