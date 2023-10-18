@@ -21,7 +21,11 @@
         <textarea v-model="recipeData.instructions" type="text" rows="10" class="form-control" maxlength="5000" required></textarea>
         <label for="background-img">Image Url</label>
         <input v-model="recipeData.img" type="url" class="form-control" maxlength="5000" required>
-        <section class="row justify-content-center mt-3">
+        <section v-if="recipeData.img" class="row justify-content-center text-center mt-3">
+            <img :src="recipeData.img" alt="" class="col-md-3" height="200">
+            <p class="text-secondary mb-0">*not actual size</p>
+        </section>
+        <section class="row justify-content-center mt-2">
             <button class="btn btn-success col-6" data-bs-toggle="modal" data-bs-target="#create-recipe">Create Recipe</button>
         </section>
     </form>

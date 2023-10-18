@@ -1,32 +1,41 @@
 <template>
 <section class="row">
     <div class="col-4 bg-img text-end">
-        <button class="btn btn-light"><i class="mdi mdi-heart"></i></button>
     </div>
-    <div class="col-4">
-        <h5>{{ recipe.category }}</h5>
-        <div v-if="recipe.creatorId == accountId">
-            <div v-if="!locked">
-                <form @submit.prevent="editRecipe">
-                    <textarea v-model="recipe.instructions" type="text" maxlength="5000" rows="15" class="form-control" required></textarea>
-                    <button class="btn btn-success">Save Instructions</button>
-                </form>
+    <div class="col-8">
+        <section class="row justify-content-between">
+            <div class="col-6">
+                <h4 class="category">{{ recipe.category }}</h4>
             </div>
-            <div v-else>
-                <p>{{ recipe.instructions }}</p>
+            <div class="col-6">
+                <div v-if="recipe.creatorId == accountId" class="text-end">
+                    <button v-if="!locked" @click="toggleLock()" class="btn btn-info" ><i class="mdi mdi-lock"></i></button>
+                    <button v-else @click="toggleLock()" class="btn btn-info"><i class="mdi mdi-lock-open-variant"></i></button>
+                </div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-6">
+                <h5 class="text-center"><u>Instructions</u></h5>
+                <div v-if="recipe.creatorId == accountId">
+                    <div v-if="!locked">
+                        <form @submit.prevent="editRecipe" class="text-center">
+                            <textarea v-model="recipe.instructions" type="text" maxlength="5000" rows="15" class="form-control" required></textarea>
+                            <button class="btn btn-success mt-1">Save Instructions</button>
+                        </form>
+                    </div>
+                <div v-else>
+                <p class="bg-dark-subtle">{{ recipe.instructions }}</p>
             </div>
         </div>
         <div v-else>
-            <p>{{ recipe.instructions }}</p>
+            <p class="bg-dark-subtle">{{ recipe.instructions }}</p>
         </div>
     </div>
-    <div class="col-4">
-        <div v-if="recipe.creatorId == accountId" class="text-end">
-            <button v-if="!locked" @click="toggleLock()" class="btn btn-danger" >lock</button>
-            <button v-else @click="toggleLock()" class="btn btn-success" >unlock</button>
-        </div>
-        <div v-for="ingredient in ingredients" :key="ingredient.id">
-            <h5>{{ ingredient.quantity }}  {{ ingredient.name }}</h5>
+    <div class="col-6">
+        <h5 class="text-center"><u>Ingredients</u></h5>
+        <div v-for="ingredient in ingredients" :key="ingredient.id" class="d-flex bg-dark-subtle justify-content-between my-1">
+            <h4 class="text-info">{{ ingredient.quantity }}  {{ ingredient.name }}</h4>
             <button v-if="!locked" @click="deleteIngredient(ingredient.id)" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
         </div>
         <div v-if="!locked">
@@ -35,13 +44,17 @@
                 <input v-model="ingredientData.name" type="text" required maxlength="255" class="form-control">
                 <label for="quantity">Quantity:</label>
                 <input v-model="ingredientData.quantity" type="text" maxlength="255" placeholder="1 Cup" class="form-control" required>
-                <button class="btn btn-success">Add Ingredient</button>
+                <div class="text-center mt-2">
+                    <button class="btn btn-success">Add Ingredient</button>
+                </div>
             </form>
         </div>
     </div>
-    <div v-if="!locked" class="text-end">
-        <button @click="deleteRecipe" class="btn btn-danger">Delete Recipe</button>
-    </div>
+</section>
+<div v-if="!locked" class="text-end">
+    <button @click="deleteRecipe" class="btn btn-danger">Delete Recipe</button>
+</div>
+</div>  
 </section>
 </template>
 
@@ -92,6 +105,7 @@ export default {
         async editRecipe(){
             try{
                 await recipesService.editRecipe(this.recipe)
+                Pop.success("Instructions Saved")
             }catch (error){
                 Pop.error(error)
             }
@@ -125,5 +139,12 @@ export default {
     height: 70vh;
     border-radius: .5rem;
     min-height: fit-content;
+}
+.category{
+    color: #527360;
+}
+
+.instructions{
+    background-color: rgba(128, 128, 128, 0.363);
 }
 </style>

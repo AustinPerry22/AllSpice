@@ -31,7 +31,7 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 .splash-img{
   background-image: url('https://images.unsplash.com/photo-1597528662465-55ece5734101?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
   background-position: center;

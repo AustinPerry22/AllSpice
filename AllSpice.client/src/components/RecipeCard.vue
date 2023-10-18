@@ -88,7 +88,7 @@ setup(props) {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 .recipe-cover{
     background-image: v-bind(recipeImg);
     background-position: center;

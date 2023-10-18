@@ -30,7 +30,7 @@ setup() {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 .modal-header{
 color: white;
 background-color: #527360;
