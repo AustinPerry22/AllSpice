@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <!-- STUB splash card and searchbar/login -->
     <Cover/>
-    <SelectCategory/>
     <section class="row justify-content-around mx-3">
       <!-- STUB recipe cards -->
       <div v-for="recipe in recipes" :key="recipe.id" class="col-4 g-5">
@@ -14,7 +13,7 @@
     <section class="row justify-content-end sticky-bottom">
       <div v-if="user.isAuthenticated" class="col-1 text-center">
         <!-- TODO make custom button -->
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target='#create-recipe'><i class="mdi mdi-plus"></i></button>
+        <button class="add-recipe-button elevation-5 mb-4 me-3" data-bs-toggle="modal" data-bs-target='#create-recipe'><i class="mdi mdi-plus"></i></button>
       </div>
     </section>
 
@@ -45,7 +44,6 @@
 import { computed, onMounted, watchEffect } from 'vue';
 import {AppState} from '../AppState'
 import Cover from '../components/Cover.vue';
-import SelectCategory from "../components/SelectCategory.vue"
 import RecipeCard from '../components/RecipeCard.vue';
 import RecipeDetails from '../components/RecipeDetails.vue';
 import CreateRecipeForm from '../components/CreateRecipeForm.vue'
@@ -93,10 +91,19 @@ export default {
           user : computed(()=> AppState.user)
         };
     },
-    components: { Cover, SelectCategory, RecipeCard, RecipeDetails, CreateRecipeForm }
+    components: { Cover, RecipeCard, RecipeDetails, CreateRecipeForm }
 }
 </script>
 
 <style scoped lang="scss">
-
+.add-recipe-button
+{
+  background-color: #198754;
+  color: white;
+  border-radius: 15rem;
+  border-style: none;
+  font-size: 225%;
+  height: 7.5vh;
+  width: 7.5vh;
+}
 </style>

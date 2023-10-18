@@ -1,5 +1,5 @@
 <template>
-    <section class="row justify-content-center text-center">
+    <section class="row justify-content-center text-center" id="cover">
       <div class="col-11-5 splash-img mt-4">
         <section class="row justify-content-end py-2">
           <div class="col-5 mt-2 mt-md-3">
@@ -13,12 +13,14 @@
         <h6>Cherish Your Family</h6>
         <h6 class="pb-5">And Their Cooking</h6>
       </div>
+      <SelectCategory id="select-category"/>
     </section>
 </template>
 
 <script>
 import Login from './Login.vue';
 import SearchBar from './SearchBar.vue';
+import SelectCategory from './SelectCategory.vue';
 
 export default {
     setup() {
@@ -47,5 +49,13 @@ h6, h1{
 .col-11-5{
   flex: 0 0 auto;
   width: 95.833333335%;
+}
+
+#cover{
+  position: relative;
+}
+#select-category{
+  position: absolute;
+  bottom: -2vh;
 }
 </style>

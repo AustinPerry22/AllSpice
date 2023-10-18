@@ -6,9 +6,9 @@
               <section class="row justify-content-between">
                 <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
-                <div v-if="account.id">
-                  <button v-if="isFavorite" @click.stop="deleteFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart"></i></button>
-                  <button v-else @click.stop="addFavorite" class="col-2 btn btn-info"><i class="mdi mdi-heart-outline"></i></button>
+                <div v-if="account.id" class="col-6 text-end pe-0">
+                  <button v-if="isFavorite" @click.stop="deleteFavorite" class="heart"><i class="mdi mdi-heart"></i></button>
+                  <button v-else @click.stop="addFavorite" class="heart"><i class="mdi mdi-heart-outline"></i></button>
 
                 </div>
               </section>
@@ -33,7 +33,6 @@ import {recipesService} from '../services/RecipesService';
 import{ingredientsService} from '../services/IngredientsService'
 import { Favorite } from '../models/Favorite';
 import { Modal } from 'bootstrap';
-import { logger } from '../utils/Logger';
 
 export default {
 props: {recipe: {type: [Recipe, Favorite], required: true}},
@@ -115,8 +114,12 @@ setup(props) {
   backdrop-filter: blur(10px);
   color: rgba(245, 44, 78, 0.89);
   text-align: center;
+  font-size: larger;
   border-radius: .5rem;
   height: fit-content;
+  border: none;
+  width: 5vh;
+  height: 5vh;
 }
 
 .title{

@@ -1,10 +1,11 @@
 <template>
-    <section class="row justify-content-center text-center">
-      <div class="col-3">
-        <div class="bg-dark d-flex justify-content-around">
-          <button @click="changeRecipes('home')" class="btn btn-success">Home</button>
-          <button @click="setFavorites()" class="btn btn-success">My Favorites</button>
-          <button @click="changeRecipes('mine')" class="btn btn-success">My Recipes</button>
+  <!-- style this row -->
+    <section class="row justify-content-center text-center">  
+      <div class="col-12 col-md-4">
+        <div class="bg-white d-flex justify-content-around rounded elevation-2 py-1">
+          <button @click="changeRecipes('home')" class="btn btn-outline-success">Home</button>
+          <button @click="setFavorites()" class="btn btn-outline-success">My Favorites</button>
+          <button @click="changeRecipes('mine')" class="btn btn-outline-success">My Recipes</button>
         </div>
       </div>
     </section>
@@ -30,5 +31,5 @@ setup() {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 </style>
