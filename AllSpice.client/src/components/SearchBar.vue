@@ -1,7 +1,7 @@
 <template>
-    <form @submit.prevent="searchRecipes" class="text-end row justify-content-end">
-        <input v-model="searchData.search" class="col-5" type="text" placeholder="Search..." required>
-        <button class="btn btn-primary col-1"><i class="mdi mdi-magnify"></i></button>
+    <form @submit.prevent="searchRecipes" class="row text-end justify-content-md-end justify-content-center">
+        <input v-model="searchData.search" class="col-8 col-md-5" type="text" placeholder="Search..." required>
+        <button class="btn btn-primary col-2 col-md-1"><i class="mdi mdi-magnify"></i></button>
         
     </form>
 </template>

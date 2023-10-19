@@ -2,18 +2,18 @@
   <div class="container-fluid">
     <!-- STUB splash card and searchbar/login -->
     <Cover/>
-    <section class="row justify-content-around mx-3">
+    <section class="row justify-content-around mx-md-3 mt-4 mt-md-0">
       <!-- STUB recipe cards -->
-      <div v-for="recipe in recipes" :key="recipe.id" class="col-4 g-5">
+      <div v-for="recipe in recipes" :key="recipe.id" class="col-6 col-md-4 my-3 my-md-4 g-md-5">
         <RecipeCard :recipe="recipe"/>
       </div>
     </section>
 
     <!-- STUB add button -->
     <section class="row justify-content-end sticky-bottom">
-      <div v-if="user.isAuthenticated" class="col-1 text-center">
+      <div v-if="user.isAuthenticated" class="col-3 col-md-1 text-center">
         <!-- TODO make custom button -->
-        <button class="add-recipe-button elevation-5 mb-4 me-3" data-bs-toggle="modal" data-bs-target='#create-recipe'><i class="mdi mdi-plus"></i></button>
+        <button class="add-recipe-button elevation-5 mb-3 mb-md-4 me-md-3" data-bs-toggle="modal" data-bs-target='#create-recipe'><i class="mdi mdi-plus"></i></button>
       </div>
     </section>
 

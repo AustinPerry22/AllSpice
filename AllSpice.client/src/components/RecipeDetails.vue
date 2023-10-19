@@ -1,8 +1,8 @@
 <template>
 <section class="row">
-    <div class="col-4 bg-img text-end">
+    <div class="col-12 col-md-4 bg-img text-end">
     </div>
-    <div class="col-8">
+    <div class="col-12 col-md-8">
         <section class="row justify-content-between">
             <div class="col-6">
                 <h4 class="category">{{ recipe.category }}</h4>
@@ -15,7 +15,7 @@
             </div>
         </section>
         <section class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <h5 class="text-center"><u>Instructions</u></h5>
                 <div v-if="recipe.creatorId == accountId">
                     <div v-if="!locked">
@@ -24,15 +24,15 @@
                             <button class="btn btn-success mt-1">Save Instructions</button>
                         </form>
                     </div>
-                <div v-else>
-                <p class="bg-dark-subtle">{{ recipe.instructions }}</p>
-            </div>
-        </div>
-        <div v-else>
+                    <div v-else>
+                        <p class="bg-dark-subtle">{{ recipe.instructions }}</p>
+                    </div>
+                </div>
+            <div v-else>
             <p class="bg-dark-subtle">{{ recipe.instructions }}</p>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <h5 class="text-center"><u>Ingredients</u></h5>
         <div v-for="ingredient in ingredients" :key="ingredient.id" class="d-flex bg-dark-subtle justify-content-between my-1">
             <h4 class="text-info">{{ ingredient.quantity }}  {{ ingredient.name }}</h4>
@@ -44,14 +44,14 @@
                 <input v-model="ingredientData.name" type="text" required maxlength="255" class="form-control">
                 <label for="quantity">Quantity:</label>
                 <input v-model="ingredientData.quantity" type="text" maxlength="255" placeholder="1 Cup" class="form-control" required>
-                <div class="text-center mt-2">
+                <div class="text-center mt-md-2">
                     <button class="btn btn-success">Add Ingredient</button>
                 </div>
             </form>
         </div>
     </div>
 </section>
-<div v-if="!locked" class="text-end">
+<div v-if="!locked" class="text-center text-md-end mt-5 mt-md-0">
     <button @click="deleteRecipe" class="btn btn-danger">Delete Recipe</button>
 </div>
 </div>  
@@ -146,5 +146,12 @@ export default {
 
 .instructions{
     background-color: rgba(128, 128, 128, 0.363);
+}
+
+@media screen and (max-width: 768px){
+ .bg-img{
+    height: 35vh;
+    margin-bottom: 2vh;
+ }
 }
 </style>

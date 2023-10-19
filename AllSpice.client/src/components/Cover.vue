@@ -1,11 +1,11 @@
 <template>
     <section class="row justify-content-center text-center" id="cover">
       <div class="col-11-5 splash-img mt-4">
-        <section class="row justify-content-end py-2">
-          <div class="col-5 mt-2 mt-md-3">
+        <section class="row justify-content-md-end justify-content-around py-2">
+          <div class="col-9 col-md-5 mt-2 mt-md-3">
             <SearchBar/>
           </div>
-          <div class="col-1">
+          <div class="col-3 col-md-1">
             <Login/>
           </div>
         </section>

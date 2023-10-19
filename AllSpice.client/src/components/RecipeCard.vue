@@ -1,12 +1,12 @@
 <template>
     <section class="row justify-content-center">
-        <div @click="openRecipeModal(recipe.id)" class="col-9">
+        <div @click="openRecipeModal(recipe.id)" class="col-10 col-md-9">
           <section class="row elevation-3 recipe-cover align-content-between selectable">
             <div class="col-12">
               <section class="row justify-content-between">
-                <h5 class="category col-4 mt-2 ms-3 p-0">{{ recipe.category }}</h5>
+                <h5 class="category col-md-4 col-7 mt-2 ms-1 ms-md-3 p-0">{{ recipe.category }}</h5>
                   <!-- TODO change heart based on favorite -->
-                <div v-if="account.id" class="col-6 text-end pe-0">
+                <div v-if="account.id" class="col-4 text-end pe-0">
                   <button v-if="isFavorite" @click.stop="deleteFavorite" class="heart"><i class="mdi mdi-heart"></i></button>
                   <button v-else @click.stop="addFavorite" class="heart"><i class="mdi mdi-heart-outline"></i></button>
 
@@ -129,5 +129,11 @@ setup(props) {
   text-align: center;
   padding-bottom: .5rem;
   border-radius: .5rem;
+}
+
+@media screen and (max-width: 768px){
+ .recipe-cover{
+  height: 35vh;
+  }
 }
 </style>
