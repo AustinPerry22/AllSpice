@@ -148,6 +148,10 @@ export default {
     background-color: rgba(128, 128, 128, 0.363);
 }
 
+p{
+    word-wrap: break-word;
+}
+
 @media screen and (max-width: 768px){
  .bg-img{
     height: 35vh;
