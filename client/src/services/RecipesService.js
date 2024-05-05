@@ -52,7 +52,10 @@ class RecipesService{
     }
 
     searchRecipes(searchData){
-        AppState.activeRecipes = AppState.recipes.filter(recipe => recipe.category.toLowerCase() == searchData.search.toLowerCase())
+        let nameFiltered = AppState.recipes.filter(recipe => recipe.title.toLowerCase() == searchData.search.toLowerCase())
+        let categoryFiltered = AppState.activeRecipes = AppState.recipes.filter(recipe => recipe.category.toLowerCase() == searchData.search.toLowerCase())
+        let activeRecipes = [...nameFiltered, ...categoryFiltered]
+        AppState.activeRecipes=activeRecipes
     }
 }
 export const recipesService = new RecipesService()
